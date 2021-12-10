@@ -1,0 +1,243 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+{% block style %}
+    .featurette{
+      background: #fff;
+      padding: 50px 6%;
+      justify-content: space-around;
+      margin: 50px 30px;
+    }
+
+    .meimg {
+      border-radius: 35%;
+      margin: 70px 20%;
+      width: 250px;
+    }
+
+    .img{
+      height: 600px;
+    }
+
+    .aboutme {
+      padding: 30px 50px 20px 50px;
+      text-align: left;
+      width: 45%;
+    }
+
+    .links {
+      width: 33px;
+      margin: 0 10px 10px 10px;
+      margin-left: 0;
+    }
+
+    .cardImg {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%; 
+      margin: 15px;
+    }
+
+    .poemCard{
+      margin: 20px;
+      width: 400px;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px #7c7b7b;
+      background-color: #00b4d8;
+    }
+    
+    @media only screen and (max-width: 850px) {
+      .cont{
+        width: 100px;
+        font-size: 10px;
+        padding: 2px;
+      }
+
+      .featurette{
+        margin: 0;
+      }
+
+      .meimg {
+        width: 220px;
+        margin: 75px 15%;
+      }
+
+      .img{
+        height: 20em;
+      }
+
+      .poemCard {
+          margin: 20px auto;
+          height: 350px;
+          width: 300px; 
+      }
+
+      .cardImg {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%; 
+        margin: 15px;
+      }
+
+        .aboutme {
+            padding: 20px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .links {
+            width: 40px;
+            margin: 10px;
+            margin-left: 0px;
+        }
+
+        .first {
+            margin-left: 0;
+        }
+
+        .poems {
+            width: 60em;
+        }
+
+        .me {
+            text-align: left;
+        }
+
+        .copyright {
+            font-size: 80%;
+            width: 50%;
+        }
+
+        
+      
+}
+
+
+
+{% endblock style %}
+{% block body %}
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="static/img/car-1.png" class="d-block w-100 img" alt="...">
+                <div class="carousel-caption d-md-block">
+                  <p>
+                    <a
+                      style="background-color: #ebc521; border-style: none; color: #000"
+                      class="btn btn-secondary cont"
+                      href="/poem/fib1"
+                      >Continue reading</a
+                    >
+                  </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/car-2.png" class="d-block w-100 img" alt="...">
+                <div class="carousel-caption d-md-block">
+                    <p>
+                    <a
+                      style="background-color: #ebc521; border-style: none; color: #000"
+                      class="btn btn-secondary cont"
+                      href="/poem/dh1"
+                      >Continue reading</a
+                    >
+                  </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="static/img/car-3.png" class="d-block w-100 img" alt="...">
+                <div class="carousel-caption d-md-block">
+                    <p>
+                    <a
+                      style="background-color: #ebc521; border-style: none; color: #000"
+                      class="btn btn-secondary cont"
+                      href="/poem/hy1"
+                      >Continue reading</a
+                    >
+                  </p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="row featurette">
+        <div class="col-md-5">
+            <img class="meimg" src="static/img/self.jpg" alt="">
+
+        </div>
+        <div class="col-md-7 aboutme">
+            <h2 class="featurette-heading">about me</h2>
+            <p style="margin: 20px auto;" class="lead">Hello Bezzies !!!
+              I'm Dilashakaur
+              and this is my underdone dairy. This is the place where I jot down all my raw feelings ...I'm a published poetess ,freestyle blog writer and an undergrad civil engineering student from Mahad Raigad district Maharashtra.
+              For me Poetry happens when feelings and words makes rhyme
+            </p>
+            <div class="first">
+                <div class="links" style="display: flex;">
+                    <a href="https://www.linkedin.com/in/dilashakaur-gowd-08503a217">
+                        <img class="links" src="static/img/linkedin.svg" alt="linkedin" />
+                    </a>
+                    <a href="https://instagram.com/_underdone_diaries_?utm_medium=copy_link">
+                        <img class="links" src="static/img/ig.svg" alt="ig" />
+                    </a>
+                    <a href="https://www.facebook.com/dilasha.gowd">
+                        <img class="links" src="static/img/fb.svg" alt="fb" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-3">
+      <div
+        class="row"
+        style="
+          text-align: center;
+        "
+      >
+
+        {% for poem in allPoems %}
+        <div
+          class="col-lg-4 poemCard"
+        >
+          <img
+            src="/media/{{poem.poemImg}}"
+            class="cardImg"
+            alt=""
+          />
+          <h2 style="font-size: 1.5rem; font-weight: 400">{{poem.title}}</h2>
+          <p style="font-size: 1em; font-weight: 350">
+            {{poem.content|safe| truncatechars:120}}
+          </p>
+          <p>
+            <a
+              style="background-color: #ebc521; border-style: none; color: #000"
+              class="btn btn-secondary"
+              href="/poem/{{poem.slug}}"
+              >Continue reading</a
+            >
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+    </div>
+{% endblock body %}

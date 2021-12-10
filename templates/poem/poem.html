@@ -1,0 +1,218 @@
+{% extends 'base.html' %} {% block title %} Poem {% endblock title %}
+{% block poemactive %} active {% endblock poemactive %}
+{% block style %} 
+      body {
+        margin: 0;
+        background-color: #fff;
+        color: #000;
+      }
+
+      .marketing {
+        margin: 150px auto 70px auto;
+      }
+
+      .marketing .col-lg-4 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .marketing h2 {
+        font-weight: 400;
+      }
+
+      .padd{
+        padding: 4em;
+    }
+
+      /* rtl:begin:ignore */
+      .marketing .col-lg-4 p {
+        margin-right: 0.75rem;
+        margin-left: 0.75rem;
+      }
+
+      .search {
+        border-color: #ebc521;
+        color: #ebc521;
+      }
+
+      .search:hover {
+        background-color: #ebc521;
+        color: #fff;
+        border-color: #ebc521;
+      }
+
+      .me {
+        text-align: center;
+      }
+
+      .copyright {
+        font-size: 80%;
+      }
+
+      .cardImg {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%; 
+      margin: 15px;
+    }
+
+    .poemCard{
+      margin: 20px;
+      width: 400px;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px #7c7b7b;
+      background-color: #00b4d8;
+    }
+
+      @media only screen and (max-width: 850px) {
+        .padd{
+            padding: 2.5em 1.5em;
+        }
+        .me {
+          text-align: left;
+        }
+
+        .copyright {
+          font-size: 80%;
+          width: 50%;
+        }
+
+        .poemCard {
+          margin: 20px auto;
+          height: 350px;
+          width: 300px; 
+        }
+
+        .cardImg {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%; 
+          margin: 15px;
+        }
+
+        .h1{
+        font-size: 25px;
+        }
+
+        .p{
+        font-size: 15px;
+        }
+      }
+
+
+{% endblock style %}
+    
+
+
+    
+{% block body %}
+    <div class="padd mb-4 text-white" style="background-color: #2E3033">
+      <div class="col-md-6 px-0">
+        <h1 class="display-4 fst-italic h1">
+           My words will rhyme with your feelings ...
+        </h1>
+        <p class="lead my-3 p">
+          Poems are made when feelings and words rhyme..and it's the craziest way to express ourselves.
+        </p>
+      </div>
+    </div>
+
+    <div class="container my-3">
+      <div
+        class="row"
+        style="
+          text-align: center;
+        "
+      >
+      {% for poem in allPoems %}
+      {% if forloop.counter0|divisibleby:3 and not forloop.first %}<div class="w-100 my-2"></div>{% endif %}
+        <div
+          class="col-lg-4 poemCard"
+          style="
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px #7c7b7b;
+            background-color: #00b4d8;
+          "
+        >
+          <img
+            src="/media/{{poem.poemImg}}"
+            class="cardImg"
+            alt=""
+          />
+          <h2 style="font-size: 1.5rem; font-weight: 400">{{poem.title}}</h2>
+          <p style="font-size: 1em; font-weight: 350">
+            {{poem.content|safe| truncatechars:135}}
+          </p>
+          <p>
+            <a
+              style="background-color: #ebc521; border-style: none; color: #000"
+              class="btn btn-secondary"
+              href="/poem/{{poem.slug}}"
+              >Continue reading</a
+            >
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+    
+    </div>
+
+
+{% endblock body %}
+    
+{% comment %} <div class="row my-3" style="background-color: #ABE5F0">
+    <div class="col-md-11 p-2">
+        <b> underdoneDairies </b> <span class="badge badge-secondary ">1&nbsp;day, 2&nbsp;hours ago</span>
+        <div> com2 </div>
+        <div class="reply mx-0 mt-2">
+            
+
+            <button class="btn btn-sm btn-primary com" type="button" data-toggle="collapse" data-target="#replyBox40" aria-expanded="false" aria-controls="replyBox40">
+                Reply
+            </button>
+            <div class="collapse" id="replyBox40">
+                <div class="card card-body my-2 replyCard">
+                    <form action="/poem/postComment" method="post">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="DD9fTPNGpqahfut3co28X66H7NnC9gQVXDZUmqzwOzbkpjUIDBcjmSBajgnjDYCL">
+                        <div class="form-group">
+                            <label for="comment">Post a reply </label>
+                            <input type="text" class="form-control inputRep" name="comment" placeholder="Enter comment here">
+                            <input type="hidden" name="parentSno" value="40">
+                        </div>
+                        <input type="hidden" name="postSno" value="3">
+                        <button type="submit" class="btn btn-primary rep">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <button class="btn replybtn com" id="showReply">show replies</button>
+            
+            
+
+            <div class="replies my-2 replies" id="replySec">
+                
+                <div class="row my-2">
+                    <div class="col-md-11" style="padding-top: 8px;margin-left: 40px; background-color: #65CADE;">
+                        <div class="col-md-11 ">
+                            <b> underdoneDairies </b> <span class="badge badge-secondary ">2&nbsp;hours ago</span>
+                            <div>sasasasas</div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                
+                <div class="row my-2">
+                    <div class="col-md-11" style="padding-top: 8px;margin-left: 40px; background-color: #65CADE;">
+                        <div class="col-md-11 ">
+                            <b> underdoneDairies </b> <span class="badge badge-secondary ">1&nbsp;day, 2&nbsp;hours ago</span>
+                            <div>rep2</div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}

@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block title %} poemPost {% endblock title %}
+
+{% block poemactive %} active {% endblock poemactive %}
+{% block style %}
+.poem{
+margin: 20px 15%;
+width: 75%;
+}
+
+.image{
+height: 900px;
+width: 90%;
+margin: 20px 0
+}
+
+.badge{
+background-color: #EBC521;
+}
+
+.content{
+margin: 10px 0 0 0;
+padding: 20px 10%;
+width: 100%
+}
+
+.replies{
+max-height: 170px;
+overflow: auto;
+padding: 2px 0;
+}
+
+.replybtn{
+background-color: #EBC521;
+color: white;
+padding: 3px;
+margin: 0 10px;
+}
+
+.comment-desc {
+display: flex;
+justify-content: space-around;
+background-color: #00b4d8;
+font-size: 18px;
+padding: 20px
+}
+
+.comments{
+width: 55%;
+margin: 20px;
+padding: 20px;
+background-color: #8BD2E0;
+max-height: 500px;
+overflow: auto;
+font-size: 12px
+}
+
+.com{
+font-size: 10px
+}
+
+.inputRep, .inputCom{
+font-size: 10px;
+padding: 2px 5px;
+}
+
+.rep{
+font-size: 10px;
+padding: 2px 5px;
+margin-top: 5px;
+}
+
+.replyCard{
+background-color: #B5E4ED;
+border-style: none;
+padding: 5px 20px;
+}
+
+@media only screen and (max-width: 800px){
+.poem{
+padding: 20px 0 0 0 ;
+margin: 0;
+width: 100%;
+}
+
+.post{
+margin-left: 20px;
+}
+
+.image{
+height: 500px;
+width: 100%;
+margin-bottom: 0
+}
+
+.comment-desc {
+display: block;
+}
+
+.content{
+padding: 20px 0;
+text-align: center;
+height: 200px;
+overflow: auto;
+margin-bottom: 40px;
+}
+
+.comments{
+margin: 20px auto;
+width: unset;
+max-height: 400px;
+}
+}
+
+{% endblock style %}
+
+{% block body %}
+{% load humanize %}
+{% load extras %}
+<div class="container poem">
+    <div class="blog-post post">
+        <h2 class="blog-poem-title">{{poem.title}}</h2>
+        <p class="blog-poem-meta" style="margin-bottom: 0.5rem">{{poem.timeStamp}} by <span style="color: #00b4d8;">Dilasha kaur</span>
+        </p>
+
+        <span class="badge badge-secondary">{{poem.views}} views</span>
+    </div>
+
+
+    <img class="image" src="/media/{{poem.poemImg}}" alt="" />
+
+                        
+
+</div>
+</div>
+
+<div class="comment-desc">
+
+    <p class="content">{{poem.content}}</p>
+
+    <div class="container comments">
+        <h2 style="font-size: 20px">Comments ({{comments.count}})</h2>
+        <div class="my-2">
+            {% if user.is_authenticated %}
+            <form action="/poem/postComment" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Post Comment </label>
+                    <input type="text" class="form-control inputCom" name="comment" placeholder="Enter comment here">
+                </div>
+                <input type="hidden" name="postSno" value="{{poem.sno}}">
+                <input type="hidden" name="parentSno" value="">
+                <button type="submit" class="btn btn-primary com rep">Submit</button>
+            </form>
+            {% else %}
+            Please login to post a comment
+            {% endif %}
+            {% for comment in comments reversed %}
+            <div class="row my-3" style="background-color: #ABE5F0">
+                <div class="col-md-11 p-2">
+                    <b> {{comment.user.username}} </b> <span
+                        class="badge badge-secondary ">{{comment.timestamp| naturaltime}}</span>
+                    <div> {{comment.comment}} </div>
+                    <div class="reply mx-0 mt-2">
+                        {% if user.is_authenticated %}
+
+                        <button class="btn btn-sm btn-primary com" type="button" data-toggle="collapse"
+                            data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                            aria-controls="replyBox{{comment.sno}}">
+                            Reply
+                        </button>
+                        <div class="collapse" id="replyBox{{comment.sno}}">
+                            <div class="card card-body my-2 replyCard">
+                                <form action="/poem/postComment" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="comment">Post a reply </label>
+                                        <input type="text" class="form-control inputRep" name="comment"
+                                            placeholder="Enter comment here">
+                                        <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                                    </div>
+                                    <input type="hidden" name="postSno" value="{{poem.sno}}">
+                                    <button type="submit" class="btn btn-primary rep">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        {% else %}
+                        <button class="btn btn-sm btn-primary com" disabled type="button" data-toggle="collapse"
+                            data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                            aria-controls="replyBox{{comment.sno}}">
+                            Login to reply
+                        </button>
+                        {% endif %}
+                        <div class="my-2 replies">
+                            {% for reply in replyDict|get_val:comment.sno reversed %}
+                            <div class="row my-2" id="replySec">
+                                <div class="col-md-11" style="padding-top: 8px;margin-left: 40px; background-color: #65CADE;">
+                                    <div class="col-md-11 ">
+                                        <b> {{reply.user.username}} </b> <span
+                                            class="badge badge-secondary ">{{reply.timestamp| naturaltime}}</span>
+                                        <div>{{reply.comment}}</div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+
+</div>
+
+{% endblock body %}
+
+
+
+
+
+
