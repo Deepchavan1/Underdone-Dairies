@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-a&yy^ao^(@s8h@uu7azc&n6!a@v&#y$!$tgfqcpv!5+6zzd5yx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'underdonediairies.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', "underdonediairies.herokuapp.com"]
 
 
 # Application definition
@@ -128,11 +128,7 @@ STATIC_URL = '/static/'
 
 import os
 
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
